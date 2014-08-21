@@ -24,7 +24,12 @@ public class HaashServiceInfoCreator extends CloudFoundryServiceInfoCreator<Haas
 
     @Override
     public boolean accept(Map<String, Object> serviceData) {
-        String label = (String) serviceData.get("label");
-        return label.equals("HaaSh");
+        Map<String, Object> credentials = (Map<String, Object>) serviceData.get("credentials");
+        String uri = (String) credentials.get("uri");
+        String username = (String) credentials.get("username");
+        String password = (String) credentials.get("password");
+        return username != null &&
+                password != null &&
+                uri != null;
     }
 }
